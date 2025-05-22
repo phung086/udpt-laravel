@@ -4,6 +4,21 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\PhongBanController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LuongController;
+
+Route::resource('luong', LuongController::class);
+
+
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('nhanvien', NhanVienController::class);
+    Route::resource('phongban', PhongBanController::class);
+});
+
+Route::middleware(['auth', 'role:nhanvien'])->group(function () {
+    Route::get('/luong', [LuongController::class, 'index']);
+});
+
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'handleLogin'])->name('login.handle');

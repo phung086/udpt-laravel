@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tai_khoans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('nhan_vien_id');
-            $table->string('ten_dang_nhap')->unique();
+            $table->string('username')->unique();
             $table->string('mat_khau');
             $table->enum('vai_tro', ['admin', 'nhanvien']);
             $table->timestamps();
